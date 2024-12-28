@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Predicted Result{% endblock %}
+
+{% block navbar %}
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <li class="nav-item">
+    <a class="nav-link" href="/profile">Profile</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/logout">Logout</a>
+  </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+  <h2 class="text-center mb-2">Prediction Result</h2>
+
+  <div class="card p-4" style="background-color: #ADDFFF; max-width: 700px; margin: 0 auto; margin-bottom: 40px;">
+
+    <p class="lead text-center" style="color: {% if result == 'Heart Disease' %} red {% else %} green {% endif %};">
+      <strong>{{ result }}</strong>
+    </p>
+    <!-- Conditional Image Rendering -->
+    {% if result == 'Heart Disease' %}
+    <img src="{{ url_for('static', filename='images/Heart_Disease.webp') }}" alt="Heart Disease"
+      class="img-fluid d-block mx-auto mb-3" style="width: 70%; max-width: 400px; height: auto;">
+    <div class="alert alert-danger">
+      <strong>Explanation:</strong> The prediction result indicates a higher risk of heart disease.<br>
+      We recommend scheduling an appointment with your family doctor to discuss these results and determine the next
+      steps for your health.
+    </div>
+    {% else %}
+    <img src="{{ url_for('static', filename='images/No_Disease.webp') }}" alt="No Heart Disease"
+      class="img-fluid d-block mx-auto mb-3" style="width: 70%; max-width: 400px; height: auto;">
+    <div class="alert alert-success">
+      <strong>Explanation:</strong> The prediction result indicates a lower risk of heart disease.<br>
+      However, it’s important to continue maintaining a healthy lifestyle.<br>
+      We recommend regular checkups with your family doctor to monitor your heart health and<br>
+      address any concerns that may arise in the future.
+    </div>
+    {% endif %}
+    <div class="text-center">
+      <a href="/input" class="btn btn-primary">Try Again</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

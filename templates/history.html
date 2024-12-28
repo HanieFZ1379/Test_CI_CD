@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Prediction History{% endblock %}
+
+{% block navbar %}
+<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+  <li class="nav-item">
+    <a class="nav-link" href="/profile">Profile</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/logout">Logout</a>
+  </li>
+</ul>
+{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center">
+    <div>
+        {% if session['user_id'] %}
+            <a href="{{ url_for('download_report', user_id=session['user_id']) }}" class="btn btn-primary">Download Prediction History</a>
+        {% endif %}
+    </div>
+</div>
+
+<div class="container mt-4 text-center">
+  <h1 class="my-4">{{ username|capitalize }}'s Prediction History</h1>
+  <div class="table-responsive">
+    {% if predictions %}
+      <table class="table table-bordered align-middle table-hover thick-border thick-border table-striped">
+        <thead class ="align-middle table-header">
+          <tr>
+            <th>Date & Time</th>
+            <th>Age</th>
+            <th>Sex</th>
+            <th>Chest Pain <br>Type</th>
+            <th>Resting Blood <br>Pressure</th>
+            <th>Cholesterol</th>
+            <th>Fasting Blood <br>Sugar</th>
+            <th>Resting <br>ECG</th>
+            <th>Max Heart Rate <br>Achieved</th>
+            <th>Exercise-Induced <br>Angina</th>
+            <th>ST <br>Depression</th>
+            <th>Slope of the ST <br>Segment</th>
+            <th>Number of Major <br>Vessels</th>
+            <th>Thalassemia</th>
+            <th>Result</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for prediction in predictions %}
+            <tr>
+              <td>{{ prediction.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+              <td>{{ prediction.age }}</td>
+              <td>{{ prediction.sex }}</td>
+              <td>{{ prediction.chest_pain }}</td>
+              <td>{{ prediction.resting_blood_pressure }} mm Hg</td>
+              <td>{{ prediction.cholesterol }} mg/dL</td>
+              <td>{{ prediction.fasting_blood_sugar }}</td>
+              <td>{{ prediction.resting_ecg }}</td>
+              <td>{{ prediction.max_heart_rate }} bpm</td>
+              <td>{{ prediction.excercise_angina }}</td>
+              <td>{{ prediction.old_peak }}</td>
+              <td>{{ prediction.st_slope }}</td>
+              <td>{{ prediction.n_major_vessels }}</td>
+              <td>{{ prediction.thalium }}</td>
+              <td class="{% if prediction['result'] == 'Heart Disease' %}text-danger{% else %}text-success{% endif %}">
+                <strong>{{ prediction.result }}</strong>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <div class="alert alert-warning">No predictions available.</div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
