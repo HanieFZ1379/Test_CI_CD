@@ -61,4 +61,4 @@ jobs:
       # Deploy to Railway using Docker image
       - name: Deploy to Railway using Docker image
         run: |
-          railway up --project ${{ secrets.RAILWAY_PROJECT_ID }} --environment production
+          railway up --environment production -- --project ${{ secrets.RAILWAY_PROJECT_ID }}
