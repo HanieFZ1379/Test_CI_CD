@@ -61,4 +61,5 @@ jobs:
       # Deploy to Railway using Docker image
       - name: Deploy to Railway using Docker image
         run: |
-          railway up --environment production
+          railway up --environment production --service heart-disease-detector
+
