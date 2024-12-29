@@ -49,9 +49,9 @@ jobs:
       - name: Set up Railway CLI
         run: |
           curl -fsSL https://railway.app/install.sh | bash
-          echo "Logging in with Railway token..."
-          export RAILWAY_TOKEN=${{ secrets.RAILWAY_TOKEN }}
-          railway login
+          echo "Configuring Railway CLI with the token..."
+          mkdir -p ~/.railway
+          echo ${{ secrets.RAILWAY_TOKEN }} > ~/.railway/token
 
       # Build Docker image for Flask app
       - name: Build Docker image
@@ -62,4 +62,3 @@ jobs:
       - name: Deploy to Railway using Docker image
         run: |
           railway up --project ${{ secrets.RAILWAY_PROJECT_ID }} --env production
-
