@@ -4,7 +4,7 @@
 The **Heart Disease Prediction Web Application** helps users predict their risk of heart disease using machine learning models. The app is built using **Flask**, **SQLAlchemy**, **Bcrypt**, and is deployed with **Docker**. It offers a user-friendly interface for inputting health data, viewing prediction results, and managing profiles.
 
 ## 🚀 Access the App
- Access the live version: [http://188.121.99.111:5000](http://188.121.99.111:5000)
+ Access the live version: [https://testcicd-production.up.railway.app/](https://testcicd-production.up.railway.app/)
 
 ---
 
