@@ -61,5 +61,5 @@ jobs:
       # Deploy to Railway using Docker image
       - name: Deploy to Railway using Docker image
         run: |
-          railway up --port 5000 --environment production
+          railway up --environment production
 
